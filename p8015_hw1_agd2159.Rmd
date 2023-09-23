@@ -28,22 +28,37 @@ summary(weather_df)
 nrow(weather_df) 
 ncol(weather_df)
 mean(pull(weather_df, "temp"))
-drop_na(weather_df)
 ```
 
-### P1 Dataframe Summary 
+### Prob. 1 Dataframe Summary 
 This imported dataset, named **weather_df** in this exercise, is a tibble dataframe that contains the first 15 days of weather readings from January 2013. 
 Data points for important weather metrics were recorded on an hourly basis. When evaluated with nrow and ncol, the dataframe contains `r nrow(weather_df)` rows and `r ncol(weather_df)` columns.
 
 * Weather Variables Measured in this Dataframe include:
-  * Temperature in Degrees Fahrenheit. The mean temperature across these days was **`r mean(pull(weather_df, "temp"))` Degrees**. 
-  * Dewpoint, which had a mean of `r mean(pull(weather_df, "dewp"))` and standard deviation of `r sd(pull(weather_df, "dewp"))`
-  * Relative Humidity, with a mean of `r mean(pull(weather_df, "humid"))` and standard deviation of `r sd(pull(weather_df, "humid"))`
-  * Wind Direction in degrees from true north
-  * Wind Speed. Mean of `r mean(pull(weather_df, "wind_speed"))` and standard deviation of `r sd(pull(weather_df, "wind_speed"))`
-  * Wind Gust, not measured for most entries.
-  * Precipitation. Mean of `r mean(pull(weather_df, "precip"))` and standard deviation of `r sd(pull(weather_df, "precip"))`
-  * Visibility
-  * Exact Time Stamps by Hour
+  * **Temperature** in Degrees Fahrenheit. The mean temperature across these days was **`r mean(pull(weather_df, "temp"))` Degrees**. 
+  * **Dewpoint**, which had a mean of `r mean(pull(weather_df, "dewp"))` and standard deviation of `r sd(pull(weather_df, "dewp"))`.
+  * **Relative Humidity**, with a mean of `r mean(pull(weather_df, "humid"))` and standard deviation of `r sd(pull(weather_df, "humid"))`.
+  * **Wind Direction** in degrees from true north. Mean 208.2 degrees.
+  * **Wind Speed**. Mean of `r mean(pull(weather_df, "wind_speed"))` and standard deviation of `r sd(pull(weather_df, "wind_speed"))`.
+  * **Wind Gust**, not measured for most entries. Mean 22.53.
+  * **Precipitation**. Mean of `r mean(pull(weather_df, "precip"))` and standard deviation of `r sd(pull(weather_df, "precip"))`.
+  * **Atmospheric Pressure** measured in pascals. Mean of 1023 Pa.
+  * **Visibility**. Mean of `r mean(pull(weather_df, "visib"))` and `r sd(pull(weather_df, "visib"))`.
+  * Exact Time Stamps by Hour.
   
+### Prob. 1 Scatterplot Generation
+
+```{r}
+#Define Variables 
+Time_Hour = pull(weather_df, "time_hour")
+Temp = pull(weather_df, "temp")
+Humidity = pull(weather_df, "humid")
+
+ggplot(weather_df, aes(x= Time_Hour, y = Temp, color = Humidity)) + geom_point()
+ggsave("ScatterplotFirstDraft.pdf")
+
+```
+
+
+
 
