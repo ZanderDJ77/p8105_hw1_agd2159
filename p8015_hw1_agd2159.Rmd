@@ -6,9 +6,6 @@ date: "09-23-2023"
 ---
 
 ## Problem 1: Inline R Code and Using GGplot
-```{r, include= FALSE}
-#install.packages("moderndive")
-```
 
 Beginning by importing required libraries:
 ```{r}
@@ -76,10 +73,39 @@ prob2_df =
     num_sample = rnorm(10),
     log_vec = num_sample > 0,
     char_vec = c("A", "B", "C", "D", "E", "AA", "BB", "CC", "DD", "EE"),
-    factor_vec = factor(c("lemon", "lemon", "lemon", "mango","mango","mango","mango","apple", "apple", "apple"))
+    factor_vec = factor(c("lemon", "lemon", "lemon", "mango","mango","mango","mango","apple", "apple", "apple"), levels = c("lemon", "mango", "apple"))
   )
 
 prob2_df
+
 ```
 
+First attempt to calculate the means of these generated dataframe columns using the pull function, only allows the `num_sample` and `log_vec` columns to be calculated, because the "dbl" and "lgl" data types are considered numerics, while the "chr" and "fct" types are considered text strings.
 
+```{r Initial Mean Calculation}
+#First calc, no transformation:
+mean(pull(prob2_df, "num_sample"))
+mean(pull(prob2_df, "log_vec"))
+mean(pull(prob2_df, "char_vec"))
+mean(pull(prob2_df, "factor_vec"))
+
+```
+
+```{r Failed Numeric Variable Transformation, eval = FALSE}
+#This code did NOT work and created an error message described below, eval = false
+char_vec_new = as.numeric(prob2_df, "char_vec")
+factor_vec_new = as.numeric(prob2_df, "factor_vec")
+
+mean(pull(prob2_df, "log_vec_new"))
+mean(pull(prob2_df, "char_vec_new"))
+mean(pull(prob2_df, "factor_vec_new"))
+```
+
+When attempting to coerce these other vector types into numerical form, using the `as.numeric` function and attempting to calculate the mean, we receive the error:
+
+`Quitting from lines 95-102 [Numeric Variable Transformation] (p8015_hw1_agd2159.Rmd)
+Error:
+! 'list' object cannot be coerced to type 'double'
+Execution halted`
+
+This indicates that string items in a dataframe cannot be forced into being converted into a particular numerical value. If these datapoints were written numbers but in the character or factor format, then it is my understanding that `as.numeric` could convert them to dbl format for mean calculation.
