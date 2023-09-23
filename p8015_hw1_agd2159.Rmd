@@ -16,4 +16,34 @@ library(tidyverse)
 library(moderndive)
 ```
 
+Importing Weather Sample Dataset from Moderndive and initial summary statistics:
+```{r}
+data("early_january_weather")
+weather_df = early_january_weather
+weather_df
+
+#Identified Important Variables in this Tibble after observing using these functions:
+#view(weather_df)
+summary(weather_df)
+nrow(weather_df) 
+ncol(weather_df)
+mean(pull(weather_df, "temp"))
+drop_na(weather_df)
+```
+
+### P1 Dataframe Summary 
+This imported dataset, named **weather_df** in this exercise, is a tibble dataframe that contains the first 15 days of weather readings from January 2013. 
+Data points for important weather metrics were recorded on an hourly basis. When evaluated with nrow and ncol, the dataframe contains `r nrow(weather_df)` rows and `r ncol(weather_df)` columns.
+
+* Weather Variables Measured in this Dataframe include:
+  * Temperature in Degrees Fahrenheit. The mean temperature across these days was **`r mean(pull(weather_df, "temp"))` Degrees**. 
+  * Dewpoint, which had a mean of `r mean(pull(weather_df, "dewp"))` and standard deviation of `r sd(pull(weather_df, "dewp"))`
+  * Relative Humidity, with a mean of `r mean(pull(weather_df, "humid"))` and standard deviation of `r sd(pull(weather_df, "humid"))`
+  * Wind Direction in degrees from true north
+  * Wind Speed. Mean of `r mean(pull(weather_df, "wind_speed"))` and standard deviation of `r sd(pull(weather_df, "wind_speed"))`
+  * Wind Gust, not measured for most entries.
+  * Precipitation. Mean of `r mean(pull(weather_df, "precip"))` and standard deviation of `r sd(pull(weather_df, "precip"))`
+  * Visibility
+  * Exact Time Stamps by Hour
+  
 
