@@ -1,0 +1,19 @@
+---
+title: "P8015_Hw1_agd2159"
+output: github_document
+author: "Zander De Jesus"
+date: "09-23-2023"
+---
+
+## Problem 1: Inline R Code and Using GGplot
+```{r, include= FALSE}
+#install.packages("moderndive")
+```
+
+Beginning by importing required libraries:
+```{r}
+library(tidyverse)
+library(moderndive)
+```
+
+
