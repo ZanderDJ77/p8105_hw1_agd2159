@@ -17,7 +17,7 @@ library(moderndive)
 ```
 
 Importing Weather Sample Dataset from Moderndive and initial summary statistics:
-```{r}
+```{r Creating Dataframe}
 data("early_january_weather")
 weather_df = early_january_weather
 weather_df
@@ -48,7 +48,7 @@ Data points for important weather metrics were recorded on an hourly basis. When
   
 ### Prob. 1 Scatterplot Generation
 
-```{r}
+```{r Weather Scatterplot}
 #Define Variables 
 Time_Hour = pull(weather_df, "time_hour")
 Temp = pull(weather_df, "temp")
@@ -59,6 +59,27 @@ ggsave("ScatterplotFirstDraft.pdf")
 
 ```
 
+The Scatterplot above visualizes the hourly temperature readings recorded across this 15 day period in January, with each point colored by its respective humidity readings. The lighter the blue, the higher the humidity.
 
+From this Scatterplot we can see that there is a visible day-night cycle visualized, where temperature dips down during the night hours and rises higher over the next day. Across the week, the temperature appears to rise from day to day, with January 1 and 2 having average temperatures between 30 and 40 degrees and the middle of the week around January 7 rising into the 50 degrees. Near the end of the measurement period, there is the largest temperature increase from January 12-14 where the temperature rises from the mid 40s into the mid 50s. The Humidity appears to be highest from January 12 - 14 as well. By January 15, the temperature drops back down to low 40s high 30 degrees. 
+
+
+
+
+# Problem 2: Generating Random Dataframe and Manipulating Variables
+
+```{r Random Dataframe}
+set.seed(1234)
+
+prob2_df = 
+  tibble(
+    num_sample = rnorm(10),
+    log_vec = num_sample > 0,
+    char_vec = c("A", "B", "C", "D", "E", "AA", "BB", "CC", "DD", "EE"),
+    factor_vec = factor(c("lemon", "lemon", "lemon", "mango","mango","mango","mango","apple", "apple", "apple"))
+  )
+
+prob2_df
+```
 
 
